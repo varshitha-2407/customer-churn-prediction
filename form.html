@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Churn Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: pink;
+            color:#1e3a8a;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            color:rgb(134, 32, 218);
+        }
+
+        form {
+            max-width: 700px;
+            margin: auto;
+            background-color:aqua;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        input[type="submit"] {
+            margin-top: 25px;
+            background-color:orchid;
+    
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            width: 100%;
+        }
+
+        input[type="submit"]:hover {
+            background-color: navy;
+        }
+
+        @media (max-width: 768px) {
+            form {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h2>Customer Churn Prediction</h2>
+    <form action="/predict" method="POST">
+        <label for="customer_id">Customer ID:</label>
+        <input type="text" id="customer_id" name="customer_id" required>
+
+        <label for="SeniorCitizen">Senior Citizen (1 for Yes, 0 for No):</label>
+        <input type="number" id="SeniorCitizen" name="SeniorCitizen" min="0" max="1" required>
+
+        <label for="MonthlyCharges">Monthly Charges:</label>
+        <input type="number" step="0.01" min="0" id="MonthlyCharges" name="MonthlyCharges" required>
+
+        <label for="TotalCharges">Total Charges:</label>
+        <input type="number" step="0.01" min="0" id="TotalCharges" name="TotalCharges" required>
+
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender" required>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select>
+
+        <label for="Partner">Partner (Yes or No):</label>
+        <select id="Partner" name="Partner" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label for="Dependents">Dependents (Yes or No):</label>
+        <select id="Dependents" name="Dependents" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label for="PhoneService">Phone Service (Yes or No):</label>
+        <select id="PhoneService" name="PhoneService" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label for="MultipleLines">Multiple Lines (Yes or No):</label>
+        <select id="MultipleLines" name="MultipleLines" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label for="InternetService">Internet Service:</label>
+        <select id="InternetService" name="InternetService" required>
+            <option value="DSL">DSL</option>
+            <option value="Fiber optic">Fiber optic</option>
+            <option value="No">No</option>
+        </select>
+
+        <label for="OnlineSecurity">Online Security (Yes or No):</label>
+        <select id="OnlineSecurity" name="OnlineSecurity" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label for="OnlineBackup">Online Backup (Yes or No):</label>
+        <select id="OnlineBackup" name="OnlineBackup" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label for="DeviceProtection">Device Protection (Yes or No):</label>
+        <select id="DeviceProtection" name="DeviceProtection" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label for="TechSupport">Tech Support (Yes or No):</label>
+        <select id="TechSupport" name="TechSupport" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label for="StreamingTV">Streaming TV (Yes or No):</label>
+        <select id="StreamingTV" name="StreamingTV" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label for="StreamingMovies">Streaming Movies (Yes or No):</label>
+        <select id="StreamingMovies" name="StreamingMovies" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label for="Contract">Contract Type:</label>
+        <select id="Contract" name="Contract" required>
+            <option value="Month-to-month">Month-to-month</option>
+            <option value="One year">One year</option>
+            <option value="Two year">Two year</option>
+        </select>
+
+        <label for="PaperlessBilling">Paperless Billing (Yes or No):</label>
+        <select id="PaperlessBilling" name="PaperlessBilling" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label for="PaymentMethod">Payment Method:</label>
+        <select id="PaymentMethod" name="PaymentMethod" required>
+            <option value="Electronic check">Electronic check</option>
+            <option value="Mailed check">Mailed check</option>
+            <option value="Bank transfer (automatic)">Bank transfer (automatic)</option>
+            <option value="Credit card (automatic)">Credit card (automatic)</option>
+        </select>
+
+        <label for="tenure">Tenure (Months):</label>
+        <input type="number" id="tenure" name="tenure" min="0" max="72" required>
+
+        <input type="submit" value="Submit">
+    </form>
+    <script>
+        // Example: Validate form before submission
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.querySelector("form");
+    
+            form.addEventListener("submit", function (e) {
+                const customerId = document.getElementById("customer_id").value.trim();
+                const monthlyCharges = parseFloat(document.getElementById("MonthlyCharges").value);
+                const totalCharges = parseFloat(document.getElementById("TotalCharges").value);
+                const tenure = parseInt(document.getElementById("tenure").value);
+    
+                if (!customerId) {
+                    alert("Customer ID cannot be empty.");
+                    e.preventDefault();
+                    return;
+                }
+    
+                if (monthlyCharges < 0 || totalCharges < 0 || tenure < 0) {
+                    alert("Charges and tenure must be non-negative.");
+                    e.preventDefault();
+                    return;
+                }
+            });
+        });
+    </script>
+    
+    </body>
+    </html>
+

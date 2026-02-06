@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prediction Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: pink;
+            color: black;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background-color:aqua;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2, h3 {
+            color: rgb(255, 0, 0);
+        }
+
+        p {
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 10px;
+            color:navy;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .back-link {
+            margin-top: 30px;
+            display: block;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Prediction Result for Customer ID: {{ customer_id }}</h2>
+        <p><strong>Prediction:</strong> {{ prediction }}</p>
+        <p><strong>Probability of Churn:</strong> {{ prob_churn }}</p>
+        <p><strong>Probability of Not Churning:</strong> {{ prob_no_churn }}</p>
+
+        <h3>LIME Explanation (Visual):</h3>
+        <img src="{{ lime_explanation_image }}" alt="LIME Explanation">
+        <p><a href="/download/{{ lime_explanation_file }}" download>📥 Download LIME Explanation Image</a></p>
+
+        <h3>SHAP Explanation (Visual):</h3>
+        <img src="{{ shap_explanation_image }}" alt="SHAP Explanation">
+        <p><a href="/download/{{ shap_explanation_file }}" download>📥 Download SHAP Explanation Image</a></p>
+
+        <a class="back-link" href="/">← Go back to form</a>
+    </div>
+</body>
+</html>
+
